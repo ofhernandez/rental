@@ -1,0 +1,130 @@
+{% extends 'template.html' %}
+
+{% load staticfiles %}
+
+{% block Title %}
+    {{ data.gallery.spanish_name }}
+{% endblock %}
+
+{% block Content_Title %}
+    {{ data.gallery.spanish_name }}
+{% endblock %}
+
+{% block Title_Icon %}
+    fa-list
+{% endblock %}
+
+{% block Path %}
+    <i class="fa fa-angle-right"></i>
+    <a href="{% url 'galleries_list' %}">Servicios</a>
+    <i class="fa fa-angle-right"></i>
+    Ver
+{% endblock %}
+
+{% block Content %}
+    {% include 'messages.html' %}
+    <i class="fa fa-calendar"></i> {{ data.gallery.date|date:'SHORT_DATE_FORMAT' }}
+    <i class="fa fa-clock-o" style="margin-left: 30px;"></i> {{ data.gallery.date|date:'TIME_FORMAT' }}
+    <br>
+    <br>
+    <div class="portlet box red">
+        <div class="portlet-title">
+            <div class="caption">
+                <i class="fa fa-list"></i> Detalles en espa&ntilde;ol
+            </div>
+        </div>
+        <div class="portlet-body">
+            <b>Nombre: </b>{{ data.gallery.spanish_name }}
+            <br>
+            {% if data.gallery.spanish_description != '' %}
+                <b>Descripci&oacute;n:</b> {{ data.gallery.spanish_description }}
+            {% endif %}
+        </div>
+    </div>
+    <div class="portlet box red">
+        <div class="portlet-title">
+            <div class="caption">
+                <i class="fa fa-list"></i> Detalles en ingl&eacute;s
+            </div>
+        </div>
+        <div class="portlet-body">
+            <b>Nombre: </b>{{ data.gallery.english_name }}
+            <br>
+            {% if data.gallery.english_description != '' %}
+                <b>Descripci&oacute;n:</b> {{ data.gallery.english_description }}
+            {% endif %}
+        </div>
+    </div>
+    <div class="portlet box red">
+        <div class="portlet-title">
+            <div class="caption">
+                <i class="fa fa-list"></i> Detalles en franc&eacute;s
+            </div>
+        </div>
+        <div class="portlet-body">
+            <b>Nombre: </b>{{ data.gallery.french_name }}
+            <br>
+            {% if data.gallery.french_description != '' %}
+                <b>Descripci&oacute;n:</b> {{ data.gallery.french_description }}
+            {% endif %}
+        </div>
+    </div>
+    <div class="portlet box red">
+        <div class="portlet-title">
+            <div class="caption">
+                <i class="fa fa-list"></i> Detalles en alem&aacute;n
+            </div>
+        </div>
+        <div class="portlet-body">
+            <b>Nombre: </b>{{ data.gallery.german_name }}
+            <br>
+            {% if data.gallery.german_description != '' %}
+                <b>Descripci&oacute;n:</b> {{ data.gallery.german_description }}
+            {% endif %}
+        </div>
+    </div>
+    <div class="portlet box red">
+        <div class="portlet-title">
+            <div class="caption">
+                <i class="fa fa-list"></i> Detalles en portugu&eacute;s
+            </div>
+        </div>
+        <div class="portlet-body">
+            <b>Nombre: </b>{{ data.gallery.portuguese_name }}
+            <br>
+            {% if data.gallery.portuguese_description != '' %}
+                <b>Descripci&oacute;n:</b> {{ data.gallery.portuguese_description }}
+            {% endif %}
+        </div>
+    </div>
+    {% if data.images %}
+        <div class="portlet box red">
+            <div class="portlet-title">
+                <div class="caption">
+                    <i class="fa fa-camera"></i> Im&aacute;genes
+                </div>
+            </div>
+            <div class="portlet-body">
+                <div class="row mix-grid">
+                    {% for image in data.images %}
+                        {% if forloop.counter|divisibleby:4 %}
+                            <div class="row margin-bottom-20">
+                        {% endif %}
+                           <div class="col-md-3 col-sm-4 col-xs-3 mix category_3"   >
+                                <div class="mix-inner">
+                                    <a class="mix-preview fancybox-button" href="{% static 'upload/' %}{{ image.name }}" title="{{ image.description }}" data-rel="fancybox-button">
+                                       <img class="img-responsive image_gallery" src="{% static 'upload/' %}{{ image.name }}" alt="">
+                                        <a href="{% url 'delete_image' data.gallery.id image.id %}"><i class="fa fa-trash-o text-danger"></i> <span class="text-danger">Eliminar</span></a>
+                                    </a>
+                                </div>
+                            </div>
+                        {% if forloop.counter|divisibleby:4 %}
+                            </div>
+                        {% endif %}
+                    {% endfor %}
+                </div>
+            </div>
+        </div>
+    {% endif %}
+    <button class="btn red" style="float: right !important" onclick="window.location='{% url 'galleries_list' %}'"><i class="fa fa-angle-double-left"></i> Volver al listado</button>
+{% endblock %}

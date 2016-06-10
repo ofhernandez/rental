@@ -1,0 +1,77 @@
+{% extends 'template.html' %}
+
+{% block Title %}
+    Inicio
+{% endblock %}
+
+{% block Title_Icon %}
+    fa-home
+{% endblock %}
+
+{% block Content_Title %}
+    Inicio
+{% endblock %}
+
+{% block Content %}
+    {% include 'messages.html' %}
+    {% if data.suggestions != 0 %}
+        <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12">
+            <div class="dashboard-stat green">
+                <div class="visual">
+                    <i class="fa fa-bullhorn"></i>
+                </div>
+                <div class="details">
+                    <div class="number">
+                         {{ data.suggestions }}
+                    </div>
+                    <div class="desc">
+                         Sugerencia{% if data.suggestions != 1 %}s{% endif %} nueva{% if data.suggestions != 1 %}s{% endif %}
+                    </div>
+                </div>
+                <a class="more" href="{% url 'suggestions_list' %}">
+                     Ver todas las sugerencias <i class="m-icon-swapright m-icon-white"></i>
+                </a>
+            </div>
+        </div>
+    {% endif %}
+    {% if data.comments != 0 %}
+        <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12">
+            <div class="dashboard-stat purple">
+                <div class="visual">
+                    <i class="fa fa-comments"></i>
+                </div>
+                <div class="details">
+                    <div class="number">
+                         {{ data.comments }}
+                    </div>
+                    <div class="desc">
+                         Comentario{% if data.comments != 1 %}s{% endif %}
+                    </div>
+                </div>
+                <a class="more" href="{% url 'comments_list' %}">
+                     Ver todos los comentarios <i class="m-icon-swapright m-icon-white"></i>
+                </a>
+            </div>
+        </div>
+    {% endif %}
+    {% if data.requests != 0 %}
+        <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12">
+            <div class="dashboard-stat blue">
+                <div class="visual">
+                    <i class="fa fa-file-text-o"></i>
+                </div>
+                <div class="details">
+                    <div class="number">
+                         {{ data.requests }}
+                    </div>
+                    <div class="desc">
+                         Solicitud{% if data.requests != 1 %}es{% endif %}
+                    </div>
+                </div>
+                <a class="more" href="{% url 'request_list' %}">
+                     Ver todas las solicitudes <i class="m-icon-swapright m-icon-white"></i>
+                </a>
+            </div>
+        </div>
+    {% endif %}
+{% endblock %}

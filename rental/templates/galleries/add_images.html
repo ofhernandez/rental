@@ -1,0 +1,43 @@
+{% extends 'template.html' %}
+
+{% load staticfiles %}
+{% load i18n %}
+
+{% block Title %}
+    Agregar im&aacute;genes
+{% endblock %}
+
+{% block Content_Title %}
+    Agregar im&aacute;genes
+{% endblock %}
+
+{% block Title_Icon %}
+    fa-camera
+{% endblock %}
+
+{% block Path %}
+    <i class="fa fa-angle-right"></i>
+    <a href="{% url 'galleries_list' %}">Galer&iacute;as de im&aacute;genes</a>
+    <i class="fa fa-angle-right"></i>
+    Agregar im&aacute;genes
+{% endblock %}
+
+{% block Content %}
+    {% include 'messages.html' %}
+    <div class="alert alert-info">
+        <i class="fa fa-info-circle"></i> Se recomienda subir al menos 6 fotos para este servicio.
+    </div>
+    <div class="portlet box red">
+        <div class="portlet-title">
+            <div class="caption">
+                <i class="fa fa-list"></i> Im&aacute;genes
+            </div>
+        </div>
+        <div class="portlet-body">
+            <form action="#" class="dropzone" id="my-dropzone" method="post">{% csrf_token %}
+
+            </form>
+        </div>
+    </div>
+    <button class="btn red" style="float: right !important" onclick="window.location='{% url 'galleries_list' %}'"><i class="fa fa-angle-double-left"></i> Volver al listado</button>
+{% endblock %}

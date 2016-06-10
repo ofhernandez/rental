@@ -1,0 +1,242 @@
+<div class="comment my_modal invisible" id="my_modal_comment">
+    <a href="javascript:close_modal('comment')">
+        <div class="close_modal" style="color: #000;">X</div>
+    </a>
+
+    <div class="content_modal">
+        <div style="height: auto; max-height: 250px; overflow: auto; color: #000;">
+        {% for comment in data.comments %}
+                <div
+                    style="border: 1px solid #202020; border-radius: 10px; margin-top: 5px; margin-left: 5px;
+                    width: 80%; position: relative; left: calc(20%/2); padding: 5px;
+                    "
+                >
+                    <div style="font-size: 10px;">
+                        {{ comment.date|date:'SHORT_DATE_FORMAT' }} - {{ comment.date|date:'TIME_FORMAT' }}
+                    </div>
+                    {{ comment.content }}
+                </div>
+        {% endfor %}
+        </div>
+        <form method="post">{% csrf_token %}
+            <div class="row" style="color: #000;">
+                <div class="col-xs-12 col-md-12 col-lg-12">
+                    <label for="text_comment">
+                        {% if data.lang == 'es' %}
+                            Comentario
+                        {% elif data.lang == 'en' %}
+                            Comment
+                        {% elif data.lang == 'pt' %}
+                            Coment&aacute;rio
+                        {% elif data.lang == 'fr' %}
+                            Commentaire
+                        {% elif data.lang == 'de' %}
+                            Kommentar
+                        {% endif %}:
+                        <span class="text-danger">*</span></label><br>
+                    <textarea name="text_comment" id="text_comment" class="form-control" required rows="3"></textarea>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-xs-12 col-md-12 col-lg-12">
+                    <button class="btn btn-success" name="btn_comment"
+                            style="margin-top: 10px; margin-bottom: 10px; float: right" type="submit">Enviar
+                    </button>
+                    <br>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
+
+
+<div class="suggestion my_modal invisible" id="my_modal_suggestion">
+    <a href="javascript:close_modal('suggestion')">
+        <div class="close_modal" style="color: #000;">X</div>
+    </a>
+
+    <div class="content_modal">
+        <form method="post">{% csrf_token %}
+            <div class="row" style="color: #000;">
+                <div class="col-xs-12 col-md-12 col-lg-12">
+                    <label for="text_suggestion">
+                        {% if data.lang == 'es' %}
+                            Sugerencia
+                        {% elif data.lang == 'en' %}
+                            Suggestion
+                        {% elif data.lang == 'pt' %}
+                            Sugestão
+                        {% elif data.lang == 'fr' %}
+                            Suggestion
+                        {% elif data.lang == 'de' %}
+                            Vorschlag
+                        {% endif %}:
+                        <span class="text-danger">*</span></label><br>
+                    <textarea name="text_suggestion" id="text_suggestion" class="form-control" required rows="3"></textarea>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-xs-12 col-md-12 col-lg-12">
+                    <button class="btn btn-success" name="btn_suggestion"
+                            style="margin-top: 10px; margin-bottom: 10px; float: right" type="submit">Enviar
+                    </button>
+                    <br>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
+
+<div class="contact my_modal invisible" id="my_modal_contact">
+    <a href="javascript:close_modal('contact')">
+        <div class="close_modal" style="color: #000;">X</div>
+    </a>
+
+    <div class="content_modal">
+        <form method="post">{% csrf_token %}
+            <div class="row" style="color: #000;">
+                <div class="col-xs-12 col-md-6 col-lg-6">
+                    {% if data.contact_info.phone %}
+                        <i class="fa fa-phone"></i>
+                        <b>
+                            {% if data.lang == 'es' %}
+                                Tel&eacute;fono
+                            {% elif data.lang == 'en' %}
+                                Phone
+                            {% elif data.lang == 'pt' %}
+                                Telefone
+                            {% elif data.lang == 'fr' %}
+                                T&eacute;l&eacute;phone
+                            {% elif data.lang == 'de' %}
+                                Telefon
+                            {% endif %}:
+                        </b>{{ data.contact_info.phone }}<br>
+                    {% endif %}
+                </div>
+                <div class="col-xs-12 col-md-6 col-lg-6">
+                    {% if data.contact_info.cel %}
+                        <div>
+                            <i class="fa fa-mobile-phone"></i>
+                            <b>
+                                {% if data.lang == 'es' %}
+                                    Tel&eacute;fono celular
+                                {% elif data.lang == 'en' %}
+                                    Cell phone
+                                {% elif data.lang == 'pt' %}
+                                    Telefone celular
+                                {% elif data.lang == 'fr' %}
+                                    T&eacute;l&eacute;phone portable
+                                {% elif data.lang == 'de' %}
+                                    Handy
+                                {% endif %}:
+                            </b>{{ data.contact_info.cel }}<br>
+                        </div>
+                    {% endif %}
+                </div>
+                <div class="col-xs-12 col-md-6 col-lg-6">
+                    {% if data.contact_info.email %}
+                        <div>
+                            <i class="fa fa-envelope"></i>
+                            <b>
+                                {% if data.lang == 'es' %}
+                                    Correo electr&oacute;nico
+                                {% elif data.lang == 'en' %}
+                                    E-mail
+                                {% elif data.lang == 'pt' %}
+                                    Correio eletrônico
+                                {% elif data.lang == 'fr' %}
+                                    Courrier &eacute;lectronique
+                                {% elif data.lang == 'de' %}
+                                    E-Mail
+                                {% endif %}:
+                            </b>{{ data.contact_info.email }}<br>
+                        </div>
+                    {% endif %}
+                </div>
+                <div class="col-xs-12 col-md-6 col-lg-6">
+                    {% if data.contact_info.fax %}
+                        <div>
+                            <i class="fa fa-hdd-o"></i>
+                            <b> Fax: </b>{{ data.contact_info.fax }}<br>
+                        </div>
+                    {% endif %}
+                </div>
+                <div class="col-xs-12 col-md-6 col-lg-6">
+                    {% if data.contact_info.direccion %}
+                        <div>
+                            <i class="fa fa-home"></i>
+                            <b>
+                                {% if data.lang == 'es' %}
+                                    Direcci&oacute;n
+                                {% elif data.lang == 'en' %}
+                                    Address
+                                {% elif data.lang == 'pt' %}
+                                    Endereço
+                                {% elif data.lang == 'fr' %}
+                                    Adresse
+                                {% elif data.lang == 'de' %}
+                                    Adresse
+                                {% endif %}:
+                            </b> {{ data.contact_info.direccion }}<br>
+                        </div>
+                    {% endif %}
+                </div>
+            </div>
+            <div class="row" style="margin-top: 10px; color: #000;">
+                <div class="col-xs-12 col-md-12 col-lg-12">
+                    {% if data.lang == 'es' %}
+                        Tambi&eacute;n puede dejarnos una solicitud llenando el siguiente formulario:
+                    {% elif data.lang == 'en' %}
+                        You can also leave us a request by filling out the form below:
+                    {% elif data.lang == 'pt' %}
+                        Você também pode deixar-nos um pedido, preencha o formulário abaixo:
+                    {% elif data.lang == 'de' %}
+                        Sie können uns auch eine Anfrage durch das unten stehende Formular ausfüllen:
+                    {% elif data.lang == 'fr' %}
+                        Vous pouvez également nous laisser une demande en remplissant le formulaire ci-dessous:
+                    {% endif %}
+                    <br>
+
+                    <form method="post">{% csrf_token %}
+                        <div class="col-xs-12 col-md-12 col-lg-12">
+                            <label for="request">
+                                {% if data.lang == 'es' %}
+                                    Solicitud:
+                                {% elif data.lang == 'en' %}
+                                    Request:
+                                {% elif data.lang == 'pt' %}
+                                    Aplicação:
+                                {% elif data.lang == 'de' %}
+                                    Anwendung:
+                                {% elif data.lang == 'fr' %}
+                                    Application:
+                                {% endif %}
+                                <span class="text-danger">*</span></label>
+                            <textarea name="request" id="request" class="form-control" required></textarea>
+                            <br>
+                            <label for="contact_info">
+                                {% if data.lang == 'es' %}
+                                    Informaci&oacute;n de contacto:
+                                {% elif data.lang == 'en' %}
+                                    Contact information:
+                                {% elif data.lang == 'pt' %}
+                                    Informação de contato:
+                                {% elif data.lang == 'de' %}
+                                    Kontaktinformationen:
+                                {% elif data.lang == 'fr' %}
+                                    Information de contact:
+                                {% endif %}
+                                <span class="text-danger">*</span></label>
+                            <textarea name="contact_info" id="contact_info" class="form-control" required rows="3"></textarea>
+                        </div>
+                        <div class="col-xs-12 col-md-12 col-lg-12">
+                            <button class="btn btn-success" name="btn_request"
+                                    style="margin-top: 10px; margin-bottom: 10px; float: right" type="submit">Enviar
+                            </button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>

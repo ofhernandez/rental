@@ -1,0 +1,67 @@
+{% extends 'template.html' %}
+
+{% load staticfiles %}
+{% load i18n %}
+
+{% block Title %}
+    Cambiar contrase&ntilde;a
+{% endblock %}
+
+{% block Content_Title %}
+    Cambiar contrase&ntilde;a
+{% endblock %}
+
+{% block Title_Icon %}
+    fa-lock
+{% endblock %}
+
+{% block Path %}
+    <i class="fa fa-angle-right"></i>
+    Cambiar contrase&ntilde;a
+{% endblock %}
+
+{% block Content %}
+    {% include 'messages.html' %}
+    <div class="portlet box red">
+        <div class="portlet-title">
+            <div class="caption">
+                <i class="fa fa-list"></i> Detalles
+            </div>
+        </div>
+        <div class="portlet-body">
+          <form id="form_answer_complaint" method="post">{% csrf_token %}
+                <div class="alert alert-danger display-hide">
+                    <button class="close" data-close="alert"></button>
+                    Han ocurrido errores.
+                </div>
+                <div class="form-group">
+                    <label class="control-label" for="phone">Contrase&ntilde;a <span class="text-danger">*</span>
+                    </label>
+                    <div>
+                        <input type="password" autofocus name="password" id="password" class="form-control">
+                    </div>
+                </div>
+                <br>
+                <div class="form-group">
+                    <label class="control-label" for="phone">Nueva contrase&ntilde;a <span class="text-danger">*</span>
+                    </label>
+                    <div>
+                        <input type="password" autofocus name="passwordN" id="passwordN" class="form-control">
+                    </div>
+                </div>
+                <br>
+                <div class="form-group">
+                    <label class="control-label" for="phone">Repetir contrase&ntilde;a <span class="text-danger">*</span>
+                    </label>
+                    <div>
+                        <input type="password" autofocus name="passwordR" id="passwordR" class="form-control">
+                    </div>
+                </div>
+                <br>
+                <button class="btn blue" style="float: right; margin-right: 20px;" type="submit"><i class="fa fa-check"></i> Aceptar</button>
+                <br/><br/>
+            </form>
+
+        </div>
+    </div>
+{% endblock %}

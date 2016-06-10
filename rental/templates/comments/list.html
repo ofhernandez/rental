@@ -1,0 +1,95 @@
+{% extends 'template.html' %}
+
+{% load staticfiles %}
+{% load i18n %}
+
+{% block Title %}
+    Listado de comentarios
+{% endblock %}
+
+{% block Content_Title %}
+    Listado de comentarios
+{% endblock %}
+
+{% block Title_Icon %}
+    fa-comments
+{% endblock %}
+
+{% block Path %}
+    <i class="fa fa-angle-right"></i>
+    Comentarios
+{% endblock %}
+
+{% block Content %}
+    {% include 'messages.html' %}
+    <div class="portlet box red">
+        <div class="portlet-title">
+            <div class="caption">
+                <i class="fa fa-list"></i> Listado
+            </div>
+{#            <div class="actions">#}
+{#                <div class="btn-group">#}
+{#                    <a class="btn btn-default" href="#" data-toggle="dropdown">#}
+{#                        <i class="fa fa-cogs"></i> Opciones <i class="fa fa-angle-down"></i>#}
+{#                    </a>#}
+{#                    <ul class="dropdown-menu pull-right">#}
+{#                        <li>#}
+{#                            <a href="#">#}
+{#                                <i class="fa fa-trash-o"></i> Eliminar#}
+{#                            </a>#}
+{#                        </li>#}
+{#                    </ul>#}
+{#                </div>#}
+{#            </div>#}
+        </div>
+        <div class="portlet-body">
+            <table class="table table-striped table-bordered table-hover" id="sample_4">
+                <thead>
+                <tr>
+                    <th style="width:8px;" class="text-center">
+                        <input type="checkbox" class="group-checkable" data-set="#sample_4 .checkboxes"/>
+                    </th>
+                    <th class="text-center">
+                         Comentario
+                    </th>
+                    <th class="text-center">
+                         Fecha
+                    </th>
+                    <th class="text-center">
+                         Hora
+                    </th>
+                    <th class="text-center">
+                         Acciones
+                    </th>
+                </tr>
+                </thead>
+                <tbody>
+                    {% for object in data.comments %}
+                        <tr class="odd gradeX">
+                            <td class="text-center">
+                                <input type="checkbox" class="checkboxes" value="{{ object.id }}"/>
+                            </td>
+                            <td>
+                                <a href="{% url 'view_comment' object.id %}">{{ object.content|truncatechars:80 }}</a>
+                            </td>
+                            <td class="text-center">
+                                 {{ object.date|date:'SHORT_DATE_FORMAT' }}
+                            </td>
+                            <td class="text-center">
+                                 {{ object.date|date:'TIME_FORMAT' }}
+                            </td>
+                            <td class="text-center" style="width: 170px;">
+                                {% trans '¿Está seguro que desea eliminar el comentario seleccionado?' as DELETE_TEXT %}
+                                {% trans 'comment' as OBJECT %}
+                                {% include 'confirmations.html' %}
+                                <a href="#delete{{ object.id }}" class="btn default btn-xs red" data-toggle="modal"><i class="fa fa-trash-o"></i> Eliminar</a>
+
+                            </td>
+                        </tr>
+                    {% endfor %}
+
+                </tbody>
+            </table>
+        </div>
+    </div>
+{% endblock %}

@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <title>SomosCUBA</title>
+
+        <meta charset="UTF-8" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+        {% load staticfiles %}
+        <link rel="icon" href="{% static 'img/logo.png' %}">
+                <link rel="stylesheet" type="text/css" href="{% static 'client/animated_services/css/style.css' %}" />
+<link rel="stylesheet" type="text/css" href="{% static 'css/bootstrap.css' %}" />
+        <link rel="stylesheet" type="text/css" href="{% static 'client/main/css/demo.css' %}" />
+        <link rel="stylesheet" type="text/css" href="{% static 'client/main/css/style6.css' %}" />
+
+    </head>
+    <body style="background-image: url({% static 'client/main/img/pattern.png' %}), url({% static 'client/main/img/6.jpg' %});">
+        {% include 'client/services/modals.html' %}
+        <a data-toggle="modal" href="{% url 'client' data.lang %}">
+            <img src="{% static 'img/home.png' %}" alt="Home" class="home_button">
+        </a>
+        <a href="javascript:show_modal('comment');" id="comment" title="{% if data.lang == 'es' %}Comentario{% elif data.lang == 'en' %}Comment{% elif data.lang == 'pt' %}Coment&aacute;rio{% elif data.lang == 'fr' %}Commentaire{% elif data.lang == 'de' %}Kommentar{% endif %}">
+            <img src="{% static 'img/comment.png' %}" alt="Comment" class="comment_button">
+        </a>
+        <a href="javascript:show_modal('suggestion');" id="suggestion" title="{% if data.lang == 'es' %}Sugerencia{% elif data.lang == 'en' %}Suggestion{% elif data.lang == 'pt' %}Sugestão{% elif data.lang == 'fr' %}Suggestion{% elif data.lang == 'de' %}Vorschlag{% endif %}">
+            <img src="{% static 'img/suggestion.png' %}" alt="Suggestion" class="suggestion_button">
+        </a>
+        <a href="javascript:show_modal('contact');" id="contact" title="Informaci&oacute;n de contacto">
+            <img src="{% static 'img/phone.png' %}" alt="Contact" class="phone_button">
+        </a>
+        <a title="Deutsch" href="/de"><div class="flag-de"><img src="{% static 'img/alemania.png' %}" alt="DE"></div></a>
+        <a title="Français" href="/fr"><span class="flag-fr"><img src="{% static 'img/francia.png' %}" alt="FR"></span></a>
+        <a title="Português" href="/pt"><span class="flag-pt"><img src="{% static 'img/brasil.png' %}" alt="PT"></span></a>
+        <a title="English" href="/"><span class="flag-en"><img src="{% static 'img/eeuu.png' %}" alt="EN"></span></a>
+        <a title="Espa&ntilde;ol" href="/es"><span class="flag-es"><img src="{% static 'img/espanna.png' %}" alt="ES"></span></a>
+        <a href="http://www.facebook.com" title="Facebook" target="_blank">
+            <img src="{% static 'img/facebook1.png' %}" class="facebook_button" alt="Facebook">
+        </a>
+        <a href="http://www.twitter.com" title="Twitter" target="_blank">
+            <img src="{% static 'img/twitter1.png' %}" class="twitter_button" alt="Twitter">
+        </a>
+        <div class="container">
+            <h1><img src="{% static 'img/logo.png' %}" alt="logo" width="70"> SomosCUBA<span></span></h1>
+            <div class="content">
+                <ul class="bmenu">
+                    {% for service in data.services %}
+                        <li><a href="/services/{{ data.lang }}/?service={{ service.id }}">
+                            {% if data.lang == 'es' %}
+                                {{ service.spanish_name }}
+                            {% elif data.lang == 'en' %}
+                                {{ service.english_name }}
+                            {% elif data.lang == 'pt' %}
+                                {{ service.portuguese_name }}
+                            {% elif data.lang == 'fr' %}
+                                {{ service.french_name }}
+                            {% elif data.lang == 'de' %}
+                                {{ service.german_name }}
+                            {% endif %}
+                        </a></li>
+                    {% endfor %}
+                    <li><a href="/services/{{ data.lang }}">
+                        {% if data.lang == 'es' %}
+                            Ver todos
+                        {% elif data.lang == 'en' %}
+                            View all
+                        {% elif data.lang == 'pt' %}
+                            Ver todos
+                        {% elif data.lang == 'fr' %}
+                            Voir tous
+                        {% elif data.lang == 'de' %}
+                            Alle anzeigen
+                        {% endif %}
+                    </a></li>
+                </ul>
+
+            </div>
+        </div>
+        <script type="text/javascript" src="{% static 'client/animated_services/js/efects.js' %}"></script>
+    </body>
+</html>

@@ -1,0 +1,83 @@
+{% extends 'template.html' %}
+
+{% load staticfiles %}
+{% load i18n %}
+
+{% block Title %}
+    Editar informaci&oacute;n de contacto
+{% endblock %}
+
+{% block Content_Title %}
+    Editar informaci&oacute;n de contacto
+{% endblock %}
+
+{% block Title_Icon %}
+    fa-phone
+{% endblock %}
+
+{% block Path %}
+    <i class="fa fa-angle-right"></i>
+    Informaci&oacute;n de contacto
+{% endblock %}
+
+{% block Content %}
+    {% include 'messages.html' %}
+    <div class="portlet box red">
+        <div class="portlet-title">
+            <div class="caption">
+                <i class="fa fa-list"></i> Detalles
+            </div>
+        </div>
+        <div class="portlet-body">
+          <form id="form_answer_complaint" method="post">{% csrf_token %}
+                <div class="alert alert-danger display-hide">
+                    <button class="close" data-close="alert"></button>
+                    Han ocurrido errores.
+                </div>
+                <div class="form-group">
+                    <label class="control-label" for="phone">Tel&eacute;fono(s)
+                    </label>
+                    <div>
+                        <input type="text" autofocus name="phone" id="phone" class="form-control" value="{{ data.contact.phone }}">
+                    </div>
+                </div>
+                <br>
+                <div class="form-group">
+                    <label class="control-label" for="cel">M&oacute;vil(es)
+                    </label>
+                    <div>
+                        <input type="text" name="cel" id="cel" class="form-control" value="{{ data.contact.cel }}">
+                    </div>
+                </div>
+                <br>
+                <div class="form-group">
+                    <label class="control-label" for="email">Correo(s) electr&oacute;nico(s)
+                    </label>
+                    <div>
+                        <input type="email" name="email" id="email" class="form-control" value="{{ data.contact.email }}">
+                    </div>
+                </div>
+                <br>
+                <div class="form-group">
+                    <label class="control-label" for="fax">Fax
+                    </label>
+                    <div>
+                        <input type="text" name="fax" id="fax" class="form-control" value="{{ data.contact.fax }}">
+                    </div>
+                </div>
+                <br>
+                <div class="form-group">
+                    <label class="control-label" for="direction">Direcci&oacute;n
+                    </label>
+                    <div>
+                        <textarea name="direction" id="direction" class="form-control">{{ data.contact.direccion }}</textarea>
+                    </div>
+                </div>
+                <br>
+                <button class="btn blue" style="float: right; margin-right: 20px;" type="submit"><i class="fa fa-check"></i> Aceptar</button>
+                <br/><br/>
+            </form>
+
+        </div>
+    </div>
+{% endblock %}

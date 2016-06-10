@@ -1,0 +1,53 @@
+{% extends 'template.html' %}
+
+{% load staticfiles %}
+
+{% block Title %}
+    Sugerencia
+{% endblock %}
+
+{% block Content_Title %}
+    Sugerencia
+{% endblock %}
+
+{% block Title_Icon %}
+    fa-bullhorn
+{% endblock %}
+
+{% block Path %}
+    <i class="fa fa-angle-right"></i>
+    <a href="{% url 'suggestions_list' %}">Sugerencias</a>
+    <i class="fa fa-angle-right"></i>
+    Ver
+{% endblock %}
+
+{% block Content %}
+
+    <div class="portlet box red">
+        <div class="portlet-title">
+            <div class="caption">
+                <i class="fa fa-list"></i> Detalles
+            </div>
+        </div>
+        <div class="portlet-body">
+            <i class="fa fa-calendar"></i> {{ data.suggestion.date|date:'SHORT_DATE_FORMAT' }}
+
+            <i class="fa fa-clock-o" style="margin-left: 30px;"></i> {{ data.suggestion.date|date:'TIME_FORMAT' }}
+            <br/>
+            <br/>
+            {% if data.suggestion.image %}
+                <img src="{% static 'upload/suggestions' %}/{{ data.suggestion.image }}" alt="Imagen" width="100" style="float: left; margin-right: 5px; margin-bottom: 5px"/>
+            {% endif %}
+            <b>Sugerencia:</b> {{ data.suggestion.content }}
+            <br/>
+            <br/>
+            {% if data.suggestion.contact_info %}
+                <b>Datos de contacto del autor de la sugerencia:</b>
+                {{ data.suggestion.contact_info }}
+            {% endif %}
+            <button class="btn red" style="float: right;" type="button" onclick="window.location='{% url 'suggestions_list' %}'"><i class="fa fa-ban"></i> Cancelar</button>
+            <br/>
+            <br/>
+        </div>
+    </div>
+{% endblock %}

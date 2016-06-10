@@ -1,0 +1,33 @@
+{% if messages %}
+    <div class="col-xs-12 col-md-12 col-lg-12">
+        <div id="mensaje">
+            <i id="icono-mensaje"></i>&nbsp;&nbsp;
+            <ul style="margin-top: -20px; margin-left: -15px;">
+            {% for m in messages %}
+                {% if messages|length != 1 %}- {% endif %}{{ m|safe }}<br>
+                {% if m.tags == 'error' %}
+                    <script>
+                        var mensaje = document.getElementById('mensaje');
+                        mensaje.className = 'alert alert-danger';
+                        var icono = document.getElementById('icono-mensaje');
+                        icono.className = 'fa fa-ban';
+                    </script>
+                {% elif m.tags == 'success' %}
+                    <script>
+                        var mensaje = document.getElementById('mensaje');
+                        mensaje.className = 'alert alert-success';
+                        var icono = document.getElementById('icono-mensaje');
+                        icono.className = 'fa fa-check-circle';
+                    </script>
+                {% endif %}
+            {% endfor %}
+            </ul>
+        </div>
+    </div>
+{% endif %}
+<div class="hide" id="mensaje_script">
+    <i id="icono-mensaje-script"></i>&nbsp;&nbsp;
+    <div id="texto_mensaje_script" style="margin-top: -20px; margin-left: 20px;">
+
+    </div>
+</div>

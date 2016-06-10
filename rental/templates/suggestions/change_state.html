@@ -1,0 +1,72 @@
+{% extends 'template.html' %}
+
+{% load staticfiles %}
+
+{% block Title %}
+    Atender sugerencia
+{% endblock %}
+
+{% block Content_Title %}
+    Atender sugerencia
+{% endblock %}
+
+{% block Title_Icon %}
+    fa-bullhorn
+{% endblock %}
+
+{% block Path %}
+    <i class="fa fa-angle-right"></i>
+    <a href="{% url 'suggestions_list' %}">Sugerencias</a>
+    <i class="fa fa-angle-right"></i>
+    Atender sugerencia
+{% endblock %}
+
+{% block Content %}
+    <div class="portlet box red">
+        <div class="portlet-title">
+            <div class="caption">
+                <i class="fa fa-list"></i> Detalles
+            </div>
+        </div>
+        <div class="portlet-body">
+            <i class="fa fa-calendar"></i> {{ data.suggestion.date|date:'SHORT_DATE_FORMAT' }}
+
+            <i class="fa fa-clock-o" style="margin-left: 30px;"></i> {{ data.suggestion.date|date:'TIME_FORMAT' }}
+            <br/>
+            <br/>
+            {% if data.suggestion.image %}
+                <img src="{% static 'upload/suggestions' %}/{{ data.suggestion.image }}" alt="Imagen" width="100" style="float: left; margin-right: 5px; margin-bottom: 5px"/>
+            {% endif %}
+            <b>Queja:</b> {{ data.suggestion.content }}
+            <br/>
+            <br/>
+            {% if data.suggestion.contact_info %}
+                <b>Datos de contacto del autor de la sugerencia:</b>
+                {{ data.suggestion.contact_info }}
+            {% endif %}
+            <br/>
+            <br/>
+            <form id="form_answer_suggestion" method="post">{% csrf_token %}
+                <div class="alert alert-danger display-hide">
+                    <button class="close" data-close="alert"></button>
+                    Han ocurrido errores.
+                </div>
+                <div class="form-group">
+                    <label class="control-label" for="answer">Respuesta
+                    <span class="required">
+                         *
+                    </span>
+                    </label>
+                    <div>
+                        <textarea name="answer" id="answer" class="form-control" autofocus></textarea>
+                    </div>
+                </div>
+                <br>
+                <button class="btn red" style="float: right;" type="button" onclick="window.location='{% url 'suggestions_list' %}'"><i class="fa fa-ban"></i> Cancelar</button>
+                <button class="btn blue" style="float: right; margin-right: 20px;" type="submit"><i class="fa fa-check"></i> Aceptar</button>
+                <br/><br/>
+            </form>
+
+        </div>
+    </div>
+{% endblock %}

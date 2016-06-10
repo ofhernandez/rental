@@ -1,0 +1,190 @@
+{% extends 'template.html' %}
+
+{% load staticfiles %}
+{% load i18n %}
+
+{% block Title %}
+    Editar servicio
+{% endblock %}
+
+{% block Content_Title %}
+    Editar servicio
+{% endblock %}
+
+{% block Title_Icon %}
+    fa-pencil
+{% endblock %}
+
+{% block Path %}
+    <i class="fa fa-angle-right"></i>
+    <a href="{% url 'galleries_list' %}">Servicios</a>
+    <i class="fa fa-angle-right"></i>
+    Editar
+{% endblock %}
+
+{% block Content %}
+    {% include 'messages.html' %}
+    <div class="portlet box red">
+        <div class="portlet-title">
+            <div class="caption">
+                <i class="fa fa-list"></i> Datos
+            </div>
+{#            <div class="actions">#}
+{#                <a class="btn btn-danger" onclick="window.location='{% url 'new_gallery' %}'">#}
+{#                    <i class="fa fa-plus"></i> Nuevo#}
+{#                </a>#}
+{#            </div>#}
+        </div>
+        <div class="portlet-body">
+            <form id="form_new_gallery" method="post">{% csrf_token %}
+                <div class="alert alert-danger display-hide">
+                    <button class="close" data-close="alert"></button>
+                    Han ocurrido errores.
+                </div>
+                <div class="form-group">
+                    <label class="control-label" for="spanish_name">Nombre en espa&ntilde;ol
+                    <span class="required">
+                         *
+                    </span>
+                    </label>
+                    <div>
+                        <input type="text" name="spanish_name" id="spanish_name" class="form-control" autofocus value="{{ data.spanish_name }}"/>
+                    </div>
+                </div>
+                <br/>
+                <div class="form-group">
+                    <label class="control-label" for="english_name">Nombre en ingl&eacute;s
+                    <span class="required">
+                         *
+                    </span>
+                    </label>
+                    <div>
+                        <input type="text" name="english_name" id="english_name" class="form-control" value="{{ data.english_name }}"/>
+                    </div>
+                </div>
+                <br/>
+                <div class="form-group">
+                    <label class="control-label" for="french_name">Nombre en franc&eacute;s
+                    <span class="required">
+                         *
+                    </span>
+                    </label>
+                    <div>
+                        <input type="text" name="french_name" id="french_name" class="form-control" value="{{ data.french_name }}"/>
+                    </div>
+                </div>
+                <br/>
+                <div class="form-group">
+                    <label class="control-label" for="german_name">Nombre en alem&aacute;n
+                    <span class="required">
+                         *
+                    </span>
+                    </label>
+                    <div>
+                        <input type="text" name="german_name" id="german_name" class="form-control" value="{{ data.german_name }}"/>
+                    </div>
+                </div>
+                <br/>
+                <div class="form-group">
+                    <label class="control-label" for="portuguese_name">Nombre en portugu&eacute;s
+                    <span class="required">
+                         *
+                    </span>
+                    </label>
+                    <div>
+                        <input type="text" name="portuguese_name" id="portuguese_name" class="form-control" value="{{ data.portuguese_name }}"/>
+                    </div>
+                </div>
+                <br/>
+                <div class="form-group">
+                    <label class="control-label" for="spanish_description">Descripci&oacute;n en espa&ntilde;ol
+                    </label>
+                    <div>
+                        <textarea name="spanish_description" id="spanish_description" class="form-control">{{ data.spanish_description }}</textarea>
+                    </div>
+                </div>
+                <br/>
+                <div class="form-group">
+                    <label class="control-label" for="english_description">Descripci&oacute;n en ingl&eacute;s
+                    </label>
+                    <div>
+                        <textarea name="english_description" id="english_description" class="form-control">{{ data.english_description }}</textarea>
+                    </div>
+                </div>
+                <br/>
+                <div class="form-group">
+                    <label class="control-label" for="french_description">Descripci&oacute;n en franc&eacute;s
+                    </label>
+                    <div>
+                        <textarea name="french_description" id="french_description" class="form-control">{{ data.french_description }}</textarea>
+                    </div>
+                </div>
+                <br/>
+                <div class="form-group">
+                    <label class="control-label" for="german_description">Descripci&oacute;n en alem&aacute;n
+                    </label>
+                    <div>
+                        <textarea name="german_description" id="german_description" class="form-control">{{ data.german_description }}</textarea>
+                    </div>
+                </div>
+                <br/>
+                <div class="form-group">
+                    <label class="control-label" for="portuguese_description">Descripci&oacute;n en portugu&eacute;s
+                    </label>
+                    <div>
+                        <textarea name="portuguese_description" id="portuguese_description" class="form-control">{{ data.portuguese_description }}</textarea>
+                    </div>
+                </div>
+                <br/>
+                <div class="row">
+                    <div class="col-xs-12 col-12 col-lg-12">
+                        <label class="control-label" for="icon">Icono
+                        </label>
+                    </div>
+                    <br>
+                    <div class="col-xs-12 col-6 col-lg-3">
+                        <input type="radio" id="none" name="icon" checked value="none"> <label for="none">Ninguno</label><br>
+                        <input type="radio" id="home" name="icon" value="home" {% if data.icon == 'home' %}checked{% endif %}> <label for="home"><i class="fa fa-home"></i> Casa</label><br>
+                        <input type="radio" id="hotel" name="icon" value="book" {% if data.icon == 'book' %}checked{% endif %}> <label for="hotel"><i class="fa fa-book"></i> Libro</label><br>
+                        <input type="radio" id="beer" name="icon" value="beer" {% if data.icon == 'beer' %}checked{% endif %}> <label for="beer"><i class="fa fa-beer"></i> Cerveza</label><br>
+                        <input type="radio" id="building-o" name="icon" value="building-o"  {% if data.icon == 'building-o' %}checked{% endif %}> <label for="building-o"><i class="fa fa-building-o"></i> Hotel</label><br>
+                        <input type="radio" id="calendar" name="icon" value="calendar" {% if data.icon == 'calendar' %}checked{% endif %}> <label for="calendar"><i class="fa fa-calendar"></i> Calendario</label><br>
+                        <input type="radio" id="camera" name="icon" value="camera" {% if data.icon == 'camera' %}checked{% endif %}> <label for="camera"><i class="fa fa-camera"></i> C&aacute;mara</label><br>
+                        <input type="radio" id="music" name="icon" value="music" {% if data.icon == 'music' %}checked{% endif %}> <label for="music"><i class="fa fa-music"></i> Recreaci&oacute;n</label><br>
+                    </div>
+                    <div class="col-xs-12 col-6 col-lg-3">
+                        <input type="radio" id="clock-o" name="icon" value="clock-o" {% if data.icon == 'clock-o' %}checked{% endif %}> <label for="clock-o"><i class="fa fa-clock-o"></i> Reloj</label><br>
+                        <input type="radio" id="coffee" name="icon" value="coffee" {% if data.icon == 'coffee' %}checked{% endif %}> <label for="coffee"><i class="fa fa-coffee"></i> Caf&eacute;</label><br>
+                        <input type="radio" id="credit-card" name="icon" value="credit-card" {% if data.icon == 'credit_card' %}checked{% endif %}> <label for="credit-card"><i class="fa fa-credit-card"></i> Tarjeta de cr&eacute;dito</label><br>
+                        <input type="radio" id="desktop" name="icon" value="desktop" {% if data.icon == 'desktop' %}checked{% endif %}> <label for="desktop"><i class="fa fa-desktop"></i> Pantalla</label><br>
+                        <input type="radio" id="cutlery" name="icon" value="cutlery" {% if data.icon == 'cutlery' %}checked{% endif %}> <label for="cutlery"><i class="fa fa-cutlery"></i> Restaurant</label><br>
+                        <input type="radio" id="envelope-o" name="icon" value="envelope-o" {% if data.icon == 'envelope-o' %}checked{% endif %}> <label for="envelope-o"><i class="fa fa-envelope-o"></i> Carta</label><br>
+                        <input type="radio" id="female" name="icon" value="female" {% if data.icon == 'female' %}checked{% endif %}> <label for="female"><i class="fa fa-female"></i> Mujer</label><br>
+                    </div>
+                    <div class="col-xs-12 col-6 col-lg-3">
+                        <input type="radio" id="fighter-jet" name="icon" value="fighter-jet" {% if data.icon == 'fighter-jet' %}checked{% endif %}> <label for="fighter-jet"><i class="fa fa-fighter-jet"></i> Avi&oacute;n</label><br>
+                        <input type="radio" id="film" name="icon" value="film" {% if data.icon == 'film' %}checked{% endif %}> <label for="film"><i class="fa fa-film"></i> Pel&iacute;cula</label><br>
+                        <input type="radio" id="money" name="icon" value="money" {% if data.icon == 'money' %}checked{% endif %}> <label for="money"><i class="fa fa-money"></i> Dinero</label><br>
+                        <input type="radio" id="road" name="icon" value="road" {% if data.icon == 'road' %}checked{% endif %}> <label for="road"><i class="fa fa-road"></i> Carretera</label><br>
+                        <input type="radio" id="suitcase" name="icon" value="suitcase" {% if data.icon == 'suitcase' %}checked{% endif %}> <label for="suitcase"><i class="fa fa-suitcase"></i> Maleta</label><br>
+                        <input type="radio" id="truck" name="icon" value="truck" {% if data.icon == 'truck' %}checked{% endif %}> <label for="truck"><i class="fa fa-truck"></i> Cami&oacute;n</label><br>
+                        <input type="radio" id="user" name="icon" value="user" {% if data.icon == 'user' %}checked{% endif %}> <label for="user"><i class="fa fa-user"></i> Usuario</label><br>
+                    </div>
+                    <div class="col-xs-12 col-6 col-lg-3">
+                        <input type="radio" id="group" name="icon" value="group" {% if data.icon == 'group' %}checked{% endif %}> <label for="group"><i class="fa fa-group"></i> Grupo de usuarios</label><br>
+                        <input type="radio" id="video-camera" name="icon" value="camera" {% if data.icon == 'video-camera' %}checked{% endif %}> <label for="video-camera"><i class="fa fa-video-camera"></i> C&aacute;mara de video</label><br>
+                        <input type="radio" id="volume-up" name="icon" value="volume-up" {% if data.icon == 'volume-up' %}checked{% endif %}> <label for="volume-up"><i class="fa fa-volume-up"></i> Volumen</label><br>
+                        <input type="radio" id="wheelchair" name="icon" value="wheelchair" {% if data.icon == 'wheelchair' %}checked{% endif %}> <label for="wheelchair"><i class="fa fa-wheelchair"></i> Silla de ruedas</label><br>
+                        <input type="radio" id="ambulance" name="icon" value="ambulance" {% if data.icon == 'ambulance' %}checked{% endif %}> <label for="ambulance"><i class="fa fa-ambulance"></i> Ambulancia</label><br>
+                        <input type="radio" id="medkit" name="icon" value="medkit" {% if data.icon == 'medkit' %}checked{% endif %}> <label for="medkit"><i class="fa fa-medkit"></i> M&eacute;dico</label><br>
+                        <input type="radio" id="hospital-o" name="icon" value="hospital-o" {% if data.icon == 'hospital-o' %}checked{% endif %}> <label for="hospital-o"><i class="fa fa-hospital-o"></i> Hospital</label><br>
+                    </div>
+                </div>
+                <br>
+                <button class="btn red" style="float: right;" type="button" onclick="window.location='{% url 'galleries_list' %}'"><i class="fa fa-ban"></i> Cancelar</button>
+                <button class="btn blue" style="float: right; margin-right: 20px;" type="submit"><i class="fa fa-check"></i> Aceptar</button>
+                <br/><br/>
+            </form>
+        </div>
+    </div>
+{% endblock %}
